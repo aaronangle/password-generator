@@ -7,7 +7,7 @@ var passwordPossibilities = [
     numeric = []
 ]
 
-//Creates all uppercase letters
+//Creates all uppercase letters and pushes to array
 function genAlphabetUpper() {
     var alphabetUpper = [];
     for (var i = 65; i < 91; i++) {
@@ -20,7 +20,7 @@ var alphabetUpper = genAlphabetUpper();
 uppercase.push(alphabetUpper);
 
 
-//Creates all lowercase letters
+//Creates all lowercase letters and pushes to the array
 function genAlphabetLower() {
     var alphabetLower = [];
     for (var i = 97; i < 123; i++) {
@@ -31,7 +31,7 @@ function genAlphabetLower() {
 var alphabetLower = genAlphabetLower();
 lowercase.push(alphabetLower);
 
-//Creates all Numeric Characters
+//Creates all Numeric Characters and pushes them to the array
 function genAlphabetNumeric() {
     var alphabetNumeric = [];
     for (var i = 48; i < 58; i++) {
@@ -42,7 +42,7 @@ function genAlphabetNumeric() {
 var alphabetNumeric = genAlphabetNumeric();
 numeric.push(alphabetNumeric);
 
-//Creates all special characters
+//Creates all special characters and push them to the above array
 function genAlphabetSpecial() {
     var alphabetSpecial = [];
     for (var i = 33; i < 47; i++) {
@@ -58,6 +58,8 @@ special.push(alphabetSpecial);
 
 //This is the main function of the program
 function getPasswordOption() {
+
+    //Just some error checking to prevent problems
     var length = parseInt(
         prompt('How many characters would you like your password to contain?')
     );
@@ -77,16 +79,19 @@ function getPasswordOption() {
         return;
     }
 
+    //Custom made passwords. Call now for free shipping
     var uppercaseChars = confirm('Do you want to you use upper case characters?')
     var lowercaseChars = confirm('Do you want to you use lower case characters?')
     var specialChars = confirm('Do you want to you use special characters?')
     var numericChars = confirm('Do you want to you use numeric characters?')
 
+    //Checking to make sure the user still has a pulse and or knows how to read
     if (!specialChars && !numericChars && !uppercaseChars && !lowercaseChars) {
         alert('You must select at least on of the options to create your password')
         return;
     }
 
+    //object to store the users answers to the prompts
     var passwordOption = {
         uppercaseChars,
         lowercaseChars,
@@ -96,7 +101,7 @@ function getPasswordOption() {
 
 
 
-    //Creates a random number for the length of each corresponding array to assign a random letter or character to the password
+    //Creates a random number for the length of each corresponding array to assign a random letter or character to the password so if the number is below 2 it can choose between 0 - 25 and so on and so forth
     function randomNumbers(randStart) {
         if (randStart < 2) {
             var randNumber = Math.floor(Math.random() * 26)
@@ -112,7 +117,7 @@ function getPasswordOption() {
         }
     }
 
-    //Password Hasher version 1.0 for all the password combinations that are aligned and can accept a range between example 1 -3
+    //Password Hasher version 1.0 for all your basic password hashing needs
     function passwordHasher(max, min) {
         var myArray = []
         for (let i = 0; i < length; i++) {
@@ -142,7 +147,7 @@ function getPasswordOption() {
         return myArray.join("")
     }
 
-    //Finally the Password Hasher version 3.0! This allows you to select three different first array indexs that aren't in order numbers for example 0, 2, 3
+    //Finally meet the Password Hasher version 3.0! This bad boy does it all. This allows you to select from three different first array indexs that aren't in order for example 0, 2, 3. It then pushes the corresponding result to the array which is stored until called upon.
     function passwordHasher3(num1, num2, num3) {
         var myArray = []
         for (let i = 0; i < length / 3; i++) {
@@ -243,11 +248,7 @@ function getPasswordOption() {
 }
 
 
-
-
-
-
-
+//one small click for you, one giant amount of time spent on this for me
 document.getElementById('generate').addEventListener('click', function () {
     getPasswordOption();
 })
